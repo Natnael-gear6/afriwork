@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Afriwork – Ethiopian Web & Design Studio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #050814;
+      --bg-alt: #0b1024;
+      --card: rgba(15, 20, 40, 0.95);
+      --accent1: #ff7a00;
+      --accent2: #00a8ff;
+      --accent3: #8a2be2;
+      --text-main: #ffffff;
+      --text-muted: #b0b7d6;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, #141b3f 0, #050814 45%, #000000 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .glow-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .glow-bg::before,
+    .glow-bg::after {
+      content: "";
+      position: absolute;
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.45;
+    }
+
+    .glow-bg::before {
+      background: radial-gradient(circle, var(--accent2), transparent 70%);
+      top: -80px;
+      left: -40px;
+    }
+
+    .glow-bg::after {
+      background: radial-gradient(circle, var(--accent3), transparent 70%);
+      bottom: -120px;
+      right: -40px;
+    }
+
+    header {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 22px 24px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-orb {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: conic-gradient(from 210deg, var(--accent1), var(--accent2), var(--accent3), #ffffff, var(--accent1));
+      box-shadow: 0 0 20px rgba(255, 122, 0, 0.7);
+    }
+
+    .logo-text {
+      font-family: "Poppins", sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      font-size: 1rem;
+      text-transform: uppercase;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      font-size: 0.9rem;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 4px;
+      transition: color 0.2s ease;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      transition: width 0.25s ease;
+    }
+
+    nav a:hover {
+      color: var(--text-main);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .cta-header {
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: linear-gradient(135deg, rgba(255, 122, 0, 0.25), rgba(0, 168, 255, 0.25));
+      color: var(--text-main);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .cta-header:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 24px 70px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 40px;
+      align-items: center;
+      margin-bottom: 60px;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(10, 16, 40, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      backdrop-filter: blur(16px);
+    }
+
+    .hero-pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent1);
+      box-shadow: 0 0 10px rgba(255, 122, 0, 0.9);
+    }
+
+    h1 {
+      font-family: "Poppins", sans-serif;
+      font-size: clamp(2.5rem, 4vw, 3.3rem);
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    h1 span {
+      background: linear-gradient(120deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      max-width: 480px;
+      margin-bottom: 22px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 26px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      color: #ffffff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.7);
+    }
+
+    .btn-secondary {
+      background: rgba(10, 16, 40, 0.9);
+      color: var(--text-main);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-1px);
+      background: rgba(18, 24, 52, 0.95);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.6);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-meta-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent2);
+    }
+
+    .hero-visual {
+      position: relative;
+      perspective: 1200px;
+      height: 340px;
+    }
+
+    .card-3d {
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      max-width: 380px;
+      height: 280px;
+      border-radius: 26px;
+      background: linear-gradient(145deg, rgba(10, 16, 40, 0.96), rgba(5, 8, 20, 0.98));
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow:
+        0 26px 60px rgba(0, 0, 0, 0.85),
+        0 0 40px rgba(0, 168, 255, 0.25);
+      transform-style: preserve-3d;
+      transform: rotateY(-18deg) rotateX(10deg) translateZ(0);
+      overflow: hidden;
+      padding: 18px 18px 16px;
+    }
+
+    .card-3d-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .card-3d-title {
+      font-family: "Poppins", sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .card-3d-tag {
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      background: rgba(255, 122, 0, 0.12);
+      color: var(--accent1);
+      border: 1px solid rgba(255, 122, 0, 0.4);
+    }
+
+    .card-3d-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .card-3d-screen {
+      border-radius: 16px;
+      background: radial-gradient(circle at top left, rgba(0, 168, 255, 0.4), rgba(5, 8, 20, 1));
+      padding: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-3d-screen::after {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 10% 0, rgba(0, 168, 255, 0.35), transparent 60%),
+        radial-gradient(circle at 90% 100%, rgba(138, 43, 226, 0.35), transparent 60%);
+      mix-blend-mode: screen;
+      opacity: 0.7;
+    }
+
+    .screen-bar {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .screen-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    .screen-line {
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.18);
+      flex: 1;
+    }
+
+    .screen-block {
+      height: 80px;
+      border-radius: 12px;
+      background: rgba(5, 8, 20, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 0 10px;
+    }
+
+    .card-3d-side {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .side-chip {
+      border-radius: 12px;
+      padding: 8px 10px;
+      background: rgba(10, 16, 40, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .side-chip span {
+      font-size: 0.7rem;
+      color: var(--accent2);
+    }
+
+    .card-3d-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .card-3d-footer strong {
+      color: var(--accent1);
+      font-weight: 500;
+    }
+
+    section {
+      margin-bottom: 60px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-family: "Poppins", sans-serif;
+      font-size: 1.4rem;
+    }
+
+    .section-sub {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      max-width: 420px;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-muted);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 18px;
+      padding: 16px 16px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at 0 0, rgba(255, 122, 0, 0.18), transparent 60%);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .card-title {
+      font-family: "Poppins", sans-serif;
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    .card-tag {
+      font-size: 0.8rem;
+      color: var(--accent2);
+      margin-bottom: 8px;
+    }
+
+    .card-text {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .card-footer {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .stat-pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(10, 16, 40, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .stat-pill strong {
+      color: var(--accent1);
+      font-weight: 600;
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .step {
+      background: rgba(10, 16, 40, 0.9);
+      border-radius: 16px;
+      padding: 14px 14px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .step-label {
+      font-size: 0.8rem;
+      color: var(--accent2);
+      margin-bottom: 4px;
+    }
+
+    .step-title {
+      font-family: "Poppins", sans-serif;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+      color: var(--text-main);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 900px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .contact-form {
+      background: var(--card);
+      border-radius: 18px;
+      padding: 18px 18px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .form-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .form-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    label {
+      font-size: 0.8rem;
+    }
+
+    input,
+    textarea,
+    select {
+      background: rgba(5, 8, 20, 0.95);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 8px 10px;
+      color: var(--text-main);
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: rgba(176, 183, 214, 0.7);
+    }
+
+    .contact-info {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .contact-info-item {
+      margin-bottom: 10px;
+    }
+
+    .contact-info-item strong {
+      color: var(--accent1);
+    }
+
+    footer {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 26px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    footer span {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="glow-bg"></div>
+
+  <header>
+    <div class="logo">
+      <div class="logo-orb"></div>
+      <div class="logo-text">Afriwork Studio</div>
+    </div>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#freelancers">Team</a>
+      <a href="#process">Process</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="cta-header">Get a Quote</button>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <div class="hero-pill">
+          <div class="hero-pill-dot"></div>
+          Ethiopia‑only · Web, Graphic & Automation Studio · Addis Ababa
+        </div>
+        <h1>
+          Turning <span>ideas</span> into high‑impact digital experiences for Ethiopian businesses.
+        </h1>
+        <p class="hero-sub">
+          Afriwork Studio is a professional creative agency headquartered in Addis Ababa,
+          powered by in‑house freelancers delivering modern websites, bold graphics and
+          smart automation for clients across Ethiopia.
+        </p>
+
+        <div class="hero-ctas">
+          <button class="btn-primary">
+            Start a Web Project
+          </button>
+          <button class="btn-secondary">
+            Graphic Design & Branding
+          </button>
+        </div>
+
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <div class="hero-meta-dot"></div>
+            Websites · Landing pages · E‑commerce · Dashboards
+          </div>
+          <div class="hero-meta-item">
+            <div class="hero-meta-dot"></div>
+            Logos · Posters · Social media · Brand identity
+          </div>
+          <div class="hero-meta-item">
+            <div class="hero-meta-dot"></div>
+            Automation · Workflows · Business systems
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="card-3d" id="card3d">
+          <div class="card-3d-header">
+            <div class="card-3d-title">Afriwork Control Panel</div>
+            <div class="card-3d-tag">Live Studio · 2025</div>
+          </div>
+          <div class="card-3d-grid">
+            <div class="card-3d-screen">
+              <div class="screen-bar">
+                <div class="screen-dot"></div>
+                <div class="screen-dot"></div>
+                <div class="screen-dot"></div>
+                <div class="screen-line"></div>
+              </div>
+              <div class="screen-block">
+                Web Design · Graphic Design · Automation<br />
+                Ethiopian businesses · Fast, high‑performance delivery.
+              </div>
+            </div>
+            <div class="card-3d-side">
+              <div class="side-chip">
+                Web Projects
+                <span>Sub‑second load</span>
+              </div>
+              <div class="side-chip">
+                Graphic Studio
+                <span>Brand‑ready</span>
+              </div>
+              <div class="side-chip">
+                Automation Flow
+                <span>Optimized</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-3d-footer">
+            <span>Head office · Addis Ababa</span>
+            <span>Projects completed: <strong>120+</strong></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+      <div class="section-header">
+        <div>
+          <div class="section-title">What We Do</div>
+          <p class="section-sub">
+            From creative design to powerful digital solutions, Afriwork Studio helps Ethiopian
+            businesses launch modern websites, strong brands and smart automation systems.
+          </p>
+        </div>
+        <div class="badge">Web · Graphic · Automation</div>
+      </div>
+
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-title">Web Design & Development</div>
+          <div class="card-tag">High‑performance, responsive, modern</div>
+          <p class="card-text">
+            Business websites, landing pages, e‑commerce and dashboards built with speed,
+            clean UX and mobile‑first design.
+          </p>
+          <div class="card-footer">
+            <span>Ideal for: SMEs, startups, NGOs</span>
+            <span>Delivery: 1–4 weeks</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Graphic Design & Branding</div>
+          <div class="card-tag">Logos · Posters · Social media</div>
+          <p class="card-text">
+            Visual identities, marketing materials and social media content that make your
+            brand stand out in Ethiopia’s digital space.
+          </p>
+          <div class="card-footer">
+            <span>Ideal for: Rebrands & campaigns</span>
+            <span>Delivery: 3–10 days</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Automation & Digital Systems</div>
+          <div class="card-tag">Workflows · Dashboards · Integrations</div>
+          <p class="card-text">
+            Custom automation flows, reporting dashboards and business tools that reduce
+            manual work and improve efficiency.
+          </p>
+          <div class="card-footer">
+            <span>Ideal for: Growing teams</span>
+            <span>Delivery: 2–6 weeks</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Technical Performance & Optimization</div>
+          <div class="card-tag">Speed · SEO · Analytics</div>
+          <p class="card-text">
+            Page speed optimization, technical SEO and analytics setup to keep your site
+            fast, discoverable and data‑driven.
+          </p>
+          <div class="card-footer">
+            <span>Ideal for: Existing sites</span>
+            <span>Delivery: 5–14 days</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-row" style="margin-top: 22px;">
+        <div class="stat-pill">
+          <strong>150+</strong> Happy clients
+        </div>
+        <div class="stat-pill">
+          <strong>300+</strong> Projects completed
+        </div>
+        <div class="stat-pill">
+          <strong>5+</strong> Years experience
+        </div>
+        <div class="stat-pill">
+          <strong>100%</strong> Client satisfaction focus
+        </div>
+      </div>
+    </section>
+
+    <!-- TEAM / FREELANCERS -->
+    <section id="freelancers">
+      <div class="section-header">
+        <div>
+          <div class="section-title">Our In‑House Freelancers</div>
+          <p class="section-sub">
+            Afriwork Studio doesn’t act as a marketplace. All freelancers work under our
+            company, ensuring consistent quality and project control.
+          </p>
+        </div>
+        <div class="badge">Curated Ethiopian talent</div>
+      </div>
+
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-title">Senior Web Designer</div>
+          <div class="card-tag">UI/UX · Front‑end</div>
+          <p class="card-text">
+            Specializes in modern, responsive interfaces and smooth user journeys for
+            Ethiopian businesses and startups.
+          </p>
+          <div class="card-footer">
+            <span>Focus: Web & dashboards</span>
+            <span>Experience: 5+ years</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Brand & Graphic Designer</div>
+          <div class="card-tag">Logos · Campaigns</div>
+          <p class="card-text">
+            Crafts visual identities, posters and social media content that communicate
+            clearly and look premium.
+          </p>
+          <div class="card-footer">
+            <span>Focus: Branding & print</span>
+            <span>Experience: 4+ years</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Automation Specialist</div>
+          <div class="card-tag">Workflows · Systems</div>
+          <p class="card-text">
+            Designs automation flows and digital tools that streamline operations and
+            reporting for local businesses.
+          </p>
+          <div class="card-footer">
+            <span>Focus: Business automation</span>
+            <span>Experience: 3+ years</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section id="process">
+      <div class="section-header">
+        <div>
+          <div class="section-title">How Projects Work</div>
+          <p class="section-sub">
+            Simple, transparent flow: you request a project, we scope it, assign the right
+            in‑house freelancer and deliver on time.
+          </p>
+        </div>
+        <div class="badge">From idea to launch</div>
+      </div>
+
+      <div class="process-steps">
+        <div class="step">
+          <div class="step-label">Step 01</div>
+          <div class="step-title">Project Request</div>
+          <p>
+            You fill out the project form with your goals, budget and timeline. We review
+            and respond quickly.
+          </p>
+        </div>
+        <div class="step">
+          <div class="step-label">Step 02</div>
+          <div class="step-title">Scope & Quote</div>
+          <p>
+            We define the scope, deliverables and schedule, then send a clear quote tailored
+            to your needs.
+          </p>
+        </div>
+        <div class="step">
+          <div class="step-label">Step 03</div>
+          <div class="step-title">Design & Build</div>
+          <p>
+            Our in‑house freelancers design, develop and iterate with check‑ins to keep you
+            aligned and confident.
+          </p>
+        </div>
+        <div class="step">
+          <div class="step-label">Step 04</div>
+          <div class="step-title">Launch & Support</div>
+          <p>
+            We deliver final assets, deploy websites or systems and provide post‑launch
+            support where needed.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-header">
+        <div>
+          <div class="section-title">Bring Your Vision to Life</div>
+          <p class="section-sub">
+            Tell us about your project and we’ll match you with the right in‑house freelancer
+            and send a tailored proposal.
+          </p>
+        </div>
+        <div class="badge">Let’s start your next project</div>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-form">
+          <form>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Full Name</label>
+                <input id="name" type="text" placeholder="Your name" />
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" type="email" placeholder="you@example.com" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone">Phone</label>
+                <input id="phone" type="text" placeholder="+251..." />
+              </div>
+              <div class="form-group">
+                <label for="service">Service Type</label>
+                <select id="service">
+                  <option>Web Design & Development</option>
+                  <option>Graphic Design & Branding</option>
+                  <option>Automation & Systems</option>
+                  <option>Performance & Optimization</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 12px;">
+              <label for="message">Project Details</label>
+              <textarea id="message" placeholder="Describe your project, goals and timeline..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary" style="margin-top: 4px;">
+              Submit Project Request
+            </button>
+          </form>
+        </div>
+
+        <div class="contact-info">
+          <div class="contact-info-item">
+            <strong>Head Office – Addis Ababa</strong><br />
+            (Add your exact building / area here)
+          </div>
+          <div class="contact-info-item">
+            <strong>Phone:</strong> +251 (your number)<br />
+            <strong>Email:</strong> info@afriworkstudio.com
+          </div>
+          <div class="contact-info-item">
+            <strong>WhatsApp / Telegram:</strong> (your handle)
+          </div>
+          <div class="contact-info-item">
+            <strong>Languages:</strong> English · Amharic
+          </div>
+          <div class="contact-info-item" style="margin-top: 10px;">
+            We focus on Ethiopian clients and businesses only, ensuring local context,
+            fast communication and tailored solutions.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© Afriwork Studio – Ethiopian Web, Graphic & Automation Agency</span>
+    <span>Built for Ethiopia · Addis Ababa · 2025</span>
+  </footer>
+
+  <script>
+    // Simple 3D tilt effect on hero card
+    const card = document.getElementById("card3d");
+    let bounds = card.getBoundingClientRect();
+
+    window.addEventListener("resize", () => {
+      bounds = card.getBoundingClientRect();
+    });
+
+    card.addEventListener("mousemove", (e) => {
+      const x = e.clientX - bounds.left;
+      const y = e.clientY - bounds.top;
+      const centerX = bounds.width / 2;
+      const centerY = bounds.height / 2;
+
+      const rotateY = ((x - centerX) / centerX) * -12;
+      const rotateX = ((y - centerY) / centerY) * 10;
+
+      card.style.transform =
+        `rotateY(${rotateY}deg) rotateX(${rotateX}deg) translateZ(0)`;
+    });
+
+    card.addEventListener("mouseleave", () => {
+      card.style.transform = "rotateY(-18deg) rotateX(10deg) translateZ(0)";
+    });
+  </script>
+</body>
+</html>
